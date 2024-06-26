@@ -10,15 +10,15 @@
 3. 通过迭代生成期望长度的混沌序列。
 4. 使用预设的S-BOX来对被加密数据进行替换，用于增强加密过程的非线性。
 5. 使用密钥来影响数据：
-  1. 将 key1 和 key2 转换为字节数组，并进行扩展以匹配混沌序列的长度；
-  2. 计算两个密钥字节数组的模 256 之和，生成一个组合的密钥字节数组；
-  3. 将组合的密钥字节数组重复扩展以匹配混沌序列的长度；
-  4. 混沌序列与组合的密钥字节数组进行结合和 S-Box 替换，生成影响后的混沌序列。
+  - 将 key1 和 key2 转换为字节数组，并进行扩展以匹配混沌序列的长度；
+  - 计算两个密钥字节数组的模 256 之和，生成一个组合的密钥字节数组；
+  - 将组合的密钥字节数组重复扩展以匹配混沌序列的长度；
+  - 混沌序列与组合的密钥字节数组进行结合和 S-Box 替换，生成影响后的混沌序列。
 6. 加密数据
-  1. 对数据进行异或操作，将影响后的混沌序列与明文数据进行逐字节异或，生成密文。
-  2. 使用 PBKDF2-HMAC-SHA256 函数和 key2 生成 HMAC 密钥。
-  3. 生成一个随机的初始化向量 (IV) 并计算 HMAC 校验码，用于验证数据完整性。
-  4. 将 IV、密文和 HMAC 校验码组合在一起，编码为 Base64 格式的最终密文。
+  - 对数据进行异或操作，将影响后的混沌序列与明文数据进行逐字节异或，生成密文。
+  - 使用 PBKDF2-HMAC-SHA256 函数和 key2 生成 HMAC 密钥。
+  - 生成一个随机的初始化向量 (IV) 并计算 HMAC 校验码，用于验证数据完整性。
+  - 将 IV、密文和 HMAC 校验码组合在一起，编码为 Base64 格式的最终密文。
 
 ## 关键函数
 1. 参数派生: derive_parameters(key1, key2)
@@ -38,15 +38,15 @@
 3. The desired length of the chaotic sequence is generated through iteration.
 4. A predefined S-BOX is used to substitute the data to be encrypted, enhancing the non-linearity of the encryption process.
 5. The keys are used to influence the data:
-  1. Convert key1 and key2 to byte arrays and expand them to match the length of the chaotic sequence;
-  2. Compute the sum of the two key byte arrays modulo 256 to generate a combined key byte array;
-  3. Repeat the combined key byte array to match the length of the chaotic sequence;
-  4. Combine the chaotic sequence with the combined key byte array and apply the S-Box substitution to generate the influenced chaotic sequence.
+   - Convert key1 and key2 to byte arrays and expand them to match the length of the chaotic sequence;
+   - Compute the sum of the two key byte arrays modulo 256 to generate a combined key byte array;
+   - Repeat the combined key byte array to match the length of the chaotic sequence;
+   - Combine the chaotic sequence with the combined key byte array and apply the S-Box substitution to generate the influenced chaotic sequence.
 6. Encrypt the data:
-  1. Perform an XOR operation on the data, using the influenced chaotic sequence to XOR with the plaintext data byte by byte, generating the ciphertext.
-  2. Use the PBKDF2-HMAC-SHA256 function and key2 to generate an HMAC key.
-  3. Generate a random initialization vector (IV) and compute the HMAC digest for data integrity verification.
-  4. Combine the IV, ciphertext, and HMAC digest, then encode the result in Base64 format to produce the final ciphertext.
+   - Perform an XOR operation on the data, using the influenced chaotic sequence to XOR with the plaintext data byte by byte, generating the ciphertext.
+   - Use the PBKDF2-HMAC-SHA256 function and key2 to generate an HMAC key.
+   - Generate a random initialization vector (IV) and compute the HMAC digest for data integrity verification.
+   - Combine the IV, ciphertext, and HMAC digest, then encode the result in Base64 format to produce the final ciphertext.
 
 ## Key Functions
 
